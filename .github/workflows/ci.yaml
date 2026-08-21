@@ -11,6 +11,11 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      APP_ENV: test
+      APP_SECRET: ci-test-secret-not-sensitive
+      DATABASE_URL: "postgresql://app:app@127.0.0.1:5432/connector?serverVersion=16&charset=utf8"
+      MESSENGER_TRANSPORT_DSN: "sync://"
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
