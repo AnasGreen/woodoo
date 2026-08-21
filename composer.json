@@ -48,7 +48,7 @@
         "post-install-cmd": ["@auto-scripts"],
         "post-update-cmd": ["@auto-scripts"],
         "test": "phpunit",
-        "analyse": "phpstan analyse",
+        "analyse": "phpstan analyse --configuration=phpstan.dist.neon --no-progress",
         "cs-check": "php-cs-fixer fix --dry-run --diff"
     },
     "extra": {"symfony": {

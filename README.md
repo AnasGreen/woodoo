@@ -70,7 +70,7 @@ Run the complete quality suite inside the application container:
 ```bash
 docker compose run --rm app composer validate --strict
 docker compose run --rm app vendor/bin/phpunit
-docker compose run --rm app vendor/bin/phpstan analyse --no-progress
+docker compose run --rm app vendor/bin/phpstan analyse --configuration=phpstan.dist.neon --no-progress
 docker compose run --rm app vendor/bin/php-cs-fixer fix --dry-run --diff
 ```
 

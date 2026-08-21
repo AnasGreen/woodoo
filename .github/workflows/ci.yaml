@@ -27,5 +27,5 @@ jobs:
       - run: composer validate --strict
       - run: composer install --prefer-dist --no-interaction --no-progress
       - run: vendor/bin/phpunit
-      - run: vendor/bin/phpstan analyse --no-progress
+      - run: vendor/bin/phpstan analyse --configuration=phpstan.dist.neon --no-progress
       - run: vendor/bin/php-cs-fixer fix --dry-run --diff
