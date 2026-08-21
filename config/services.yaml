@@ -1,0 +1,13 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Kernel.php'
+            - '../src/Mapping/Entity/'
+            - '../src/Sync/Entity/'
