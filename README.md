@@ -1,6 +1,6 @@
 # woodoo
 
-[![CI](https://github.com/woodoo/woodoo/actions/workflows/ci.yaml/badge.svg)](https://github.com/woodoo/woodoo/actions/workflows/ci.yaml)
+[![CI](https://github.com/AnasGreen/woodoo/actions/workflows/ci.yaml/badge.svg)](https://github.com/AnasGreen/woodoo/actions/workflows/ci.yaml)
 
 A production-oriented, open-source synchronization platform for connecting Odoo and WooCommerce. This repository currently provides the application foundation, persistence model, asynchronous processing infrastructure, and development tooling.
 
@@ -90,3 +90,4 @@ Keep modules cohesive, add tests with behavior changes, and avoid introducing se
 ## License
 
 Released under the [MIT License](LICENSE).
+
