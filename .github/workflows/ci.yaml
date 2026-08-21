@@ -13,6 +13,7 @@ jobs:
     timeout-minutes: 15
     env:
       APP_ENV: test
+      APP_DEBUG: "1"
       APP_SECRET: ci-test-secret-not-sensitive
       DATABASE_URL: "postgresql://app:app@127.0.0.1:5432/connector?serverVersion=16&charset=utf8"
       MESSENGER_TRANSPORT_DSN: "sync://"
@@ -32,5 +33,6 @@ jobs:
       - run: composer validate --strict
       - run: composer install --prefer-dist --no-interaction --no-progress
       - run: vendor/bin/phpunit
+      - run: php bin/console cache:warmup --env=test --no-interaction
       - run: vendor/bin/phpstan analyse --configuration=phpstan.dist.neon --no-progress
       - run: vendor/bin/php-cs-fixer fix --dry-run --diff
