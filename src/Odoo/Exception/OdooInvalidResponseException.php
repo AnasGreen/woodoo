@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace App\Odoo\Exception;
 
-final class OdooConfigurationException extends OdooException
+final class OdooInvalidResponseException extends OdooException
 {
 }

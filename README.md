@@ -4,7 +4,7 @@
 
 A production-oriented, open-source synchronization platform for connecting Odoo and WooCommerce. This repository currently provides the application foundation, persistence model, asynchronous processing infrastructure, and development tooling.
 
-> **Project status:** active early development. Product, category, brand, order, and webhook synchronization features are **not implemented yet**. No Odoo or WooCommerce API calls are made by this version.
+> **Project status:** active early development. A generic Odoo JSON-RPC client is available for authentication and read operations, but product, category, brand, order, and webhook synchronization workflows are **not implemented yet**. WooCommerce API calls are not implemented.
 
 ## Architecture
 
@@ -59,9 +59,22 @@ php bin/console messenger:consume async --time-limit=3600 --memory-limit=256M
 
 ## Environment configuration
 
-Copy `.env.example` to `.env.local` and replace placeholders locally. Odoo settings use `ODOO_URL`, `ODOO_DATABASE`, `ODOO_USERNAME`, `ODOO_API_KEY`, and `ODOO_BRAND_ATTRIBUTE_ID`. WooCommerce settings use `WOOCOMMERCE_URL`, `WOOCOMMERCE_CONSUMER_KEY`, and `WOOCOMMERCE_CONSUMER_SECRET`.
+Copy `.env.example` to `.env.local` and replace placeholders locally. Odoo settings use `ODOO_URL`, `ODOO_DATABASE`, `ODOO_USERNAME`, `ODOO_API_KEY`, `ODOO_BRAND_ATTRIBUTE_ID`, and `ODOO_TIMEOUT`. WooCommerce settings use `WOOCOMMERCE_URL`, `WOOCOMMERCE_CONSUMER_KEY`, and `WOOCOMMERCE_CONSUMER_SECRET`.
 
 Never commit `.env.local`, credentials, customer data, or production URLs. API secrets must never be included in logs or exception messages. For production, inject secrets through the deployment platform rather than storing them in files.
+
+## Odoo JSON-RPC client
+
+The Odoo module provides a reusable JSON-RPC client with authentication, `execute_kw`, `search_read`, and `read` support. Its automated tests use Symfony's `MockHttpClient` exclusively and never contact an external Odoo instance. No synchronization workflow or Odoo write operation is implemented at this stage.
+
+After configuring `.env.local`, the connection and a limited product-template search can be tested with read-only commands:
+
+```bash
+php bin/console app:odoo:test-connection
+php bin/console app:odoo:search-products "<search-term>"
+```
+
+The search reads at most 20 `product.template` records and never invokes an Odoo mutation method.
 
 ## Tests and quality checks
 

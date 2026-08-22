@@ -11,3 +11,13 @@ services:
             - '../src/Kernel.php'
             - '../src/Mapping/Entity/'
             - '../src/Sync/Entity/'
+
+    App\Odoo\Client\OdooClientInterface: '@App\Odoo\Client\OdooJsonRpcClient'
+
+    App\Odoo\Client\OdooJsonRpcClient:
+        arguments:
+            $baseUrl: '%env(ODOO_URL)%'
+            $database: '%env(ODOO_DATABASE)%'
+            $username: '%env(ODOO_USERNAME)%'
+            $apiKey: '%env(ODOO_API_KEY)%'
+            $timeout: '%env(float:ODOO_TIMEOUT)%'
