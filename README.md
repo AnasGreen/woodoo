@@ -59,7 +59,7 @@ php bin/console messenger:consume async --time-limit=3600 --memory-limit=256M
 
 ## Environment configuration
 
-Copy `.env.example` to `.env.local` and replace placeholders locally. Odoo settings use `ODOO_URL`, `ODOO_DATABASE`, `ODOO_USERNAME`, `ODOO_API_KEY`, `ODOO_BRAND_ATTRIBUTE_ID`, and `ODOO_TIMEOUT`. WooCommerce settings use `WOOCOMMERCE_URL`, `WOOCOMMERCE_CONSUMER_KEY`, and `WOOCOMMERCE_CONSUMER_SECRET`.
+Copy `.env.example` to `.env.local` and replace placeholders locally. Odoo settings use `ODOO_URL`, `ODOO_DATABASE`, `ODOO_USERNAME`, `ODOO_API_KEY`, `ODOO_BRAND_ATTRIBUTE_ID`, and `ODOO_TIMEOUT`. WooCommerce settings use `WOOCOMMERCE_URL`, `WOOCOMMERCE_CONSUMER_KEY`, `WOOCOMMERCE_CONSUMER_SECRET`, and `WOOCOMMERCE_TIMEOUT`.
 
 Never commit `.env.local`, credentials, customer data, or production URLs. API secrets must never be included in logs or exception messages. For production, inject secrets through the deployment platform rather than storing them in files.
 
@@ -75,6 +75,19 @@ php bin/console app:odoo:search-products "<search-term>"
 ```
 
 The search reads at most 20 `product.template` records and never invokes an Odoo mutation method.
+
+## WooCommerce REST client
+
+The WooCommerce module provides a reusable REST client for the versioned `/wp-json/wc/v3/` API. It supports generic `GET`, `POST`, and `PUT` requests; all automated write tests use `MockHttpClient` and never contact an external store.
+
+After configuring `.env.local`, API access and a limited product search can be tested with read-only commands:
+
+```bash
+php bin/console app:woocommerce:test-connection
+php bin/console app:woocommerce:search-products "<search-term>"
+```
+
+Both diagnostic commands use `GET` exclusively. The search returns at most 20 products.
 
 ## Tests and quality checks
 

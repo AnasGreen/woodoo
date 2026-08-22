@@ -21,3 +21,12 @@ services:
             $username: '%env(ODOO_USERNAME)%'
             $apiKey: '%env(ODOO_API_KEY)%'
             $timeout: '%env(float:ODOO_TIMEOUT)%'
+
+    App\WooCommerce\Client\WooCommerceClientInterface: '@App\WooCommerce\Client\WooCommerceRestClient'
+
+    App\WooCommerce\Client\WooCommerceRestClient:
+        arguments:
+            $baseUrl: '%env(WOOCOMMERCE_URL)%'
+            $consumerKey: '%env(WOOCOMMERCE_CONSUMER_KEY)%'
+            $consumerSecret: '%env(WOOCOMMERCE_CONSUMER_SECRET)%'
+            $timeout: '%env(float:WOOCOMMERCE_TIMEOUT)%'
